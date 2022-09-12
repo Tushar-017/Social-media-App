@@ -9,6 +9,7 @@ import Header from "./components/Header"
 import Footer from "./components/Footer"
 import HomeGuest from "./components/HomeGuest"
 import FlashMsg from "./components/FlashMsg"
+import NotFound from "./components/NotFound"
 
 import About from "./pages/About"
 import Terms from "./pages/Terms"
@@ -16,6 +17,7 @@ import Home from "./pages/Home"
 import CreatePost from "./pages/CreatePost"
 import ViewSinglePost from "./pages/ViewSinglePost"
 import Profile from "./pages/Profile"
+import EditPost from "./pages/EditPost"
 
 import StateContext from "./context/StateContext"
 import DispatchContext from "./context/DispatchContext"
@@ -73,9 +75,11 @@ function Main() {
               element={state.loggedIn ? <Home /> : <HomeGuest />}
             />
             <Route path="/post/:id" element={<ViewSinglePost />} />
+            <Route path="/post/:id/edit" element={<EditPost />} />
             <Route path="/about-us" element={<About />} />
             <Route path="/terms" element={<Terms />} />
             <Route path="/create-post" element={<CreatePost />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
           <Footer />
         </BrowserRouter>

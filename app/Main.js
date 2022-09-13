@@ -2,6 +2,7 @@ import React, { useEffect, useReducer } from "react"
 import ReactDOM from "react-dom/client"
 import { useImmerReducer } from "use-immer"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
+import { CSSTransition } from "react-transition-group"
 import Axios from "axios"
 Axios.defaults.baseURL = "http://localhost:8080"
 
@@ -9,7 +10,7 @@ import Header from "./components/Header"
 import Footer from "./components/Footer"
 import HomeGuest from "./components/HomeGuest"
 import FlashMsg from "./components/FlashMsg"
-import NotFound from "./components/NotFound"
+import Search from "./components/Search"
 
 import About from "./pages/About"
 import Terms from "./pages/Terms"
@@ -18,6 +19,7 @@ import CreatePost from "./pages/CreatePost"
 import ViewSinglePost from "./pages/ViewSinglePost"
 import Profile from "./pages/Profile"
 import EditPost from "./pages/EditPost"
+import NotFound from "./components/NotFound"
 
 import StateContext from "./context/StateContext"
 import DispatchContext from "./context/DispatchContext"
@@ -31,6 +33,7 @@ function Main() {
       username: localStorage.getItem("appUsername"),
       avatar: localStorage.getItem("appAvatar"),
     },
+    isSearchOpen: false,
   }
 
   function ourReducer(draft, action) {
@@ -44,6 +47,12 @@ function Main() {
         return
       case "FLASHMESSAGE":
         draft.flashMessages.push(action.value)
+        return
+      case "OPENSEARCH":
+        draft.isSearchOpen = true
+        return
+      case "CLOSESEARCH":
+        draft.isSearchOpen = false
         return
     }
   }
@@ -81,6 +90,14 @@ function Main() {
             <Route path="/create-post" element={<CreatePost />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
+          <CSSTransition
+            timeout={330}
+            in={state.isSearchOpen}
+            classNames="search-overlay"
+            unmountOnExit
+          >
+            <Search />
+          </CSSTransition>
           <Footer />
         </BrowserRouter>
       </DispatchContext.Provider>

@@ -4,7 +4,7 @@ import Axios from "axios"
 
 import LoadingIcon from "./LoadingIcon"
 
-function ProfilePosts() {
+function ProfileFollowing() {
   const { username } = useParams()
 
   const [isLoading, setIsLoading] = useState(true)
@@ -15,7 +15,7 @@ function ProfilePosts() {
 
     const fetchPosts = async () => {
       try {
-        const response = await Axios.get(`/profile/${username}/posts`, {
+        const response = await Axios.get(`/profile/${username}/following`, {
           cancelToken: ourRequest.token,
         })
         setPosts(response.data)
@@ -34,20 +34,15 @@ function ProfilePosts() {
 
   return (
     <div className="list-group">
-      {posts.map((post) => {
-        const date = new Date(post.createdDate)
-        const dateFormatted = `${
-          date.getMonth() + 1
-        }/${date.getDate()}/${date.getFullYear()}`
+      {posts.map((following, index) => {
         return (
           <Link
-            key={post._id}
-            to={`/post/${post._id}`}
+            key={index}
+            to={`/profile/${following.username}`}
             className="list-group-item list-group-item-action"
           >
-            <img className="avatar-tiny" src={post.author.avatar} />{" "}
-            <strong>{post.title}</strong>{" "}
-            <span className="text-muted small">on {dateFormatted} </span>
+            <img className="avatar-tiny" src={following.avatar} />{" "}
+            {following.username}
           </Link>
         )
       })}
@@ -55,4 +50,4 @@ function ProfilePosts() {
   )
 }
 
-export default ProfilePosts
+export default ProfileFollowing

@@ -11,6 +11,10 @@ function HeaderLoggedIn() {
 
   const handleLogout = () => {
     appDispatch({ type: "LOGOUT" })
+    appDispatch({
+      type: "FLASHMESSAGE",
+      value: "You have successfully SignOut.",
+    })
   }
   const handleSearchIcon = (e) => {
     e.preventDefault(appDispatch({ type: "OPENSEARCH" }))
@@ -30,10 +34,19 @@ function HeaderLoggedIn() {
       <span
         data-for="chat"
         data-tip="Chat"
-        className="mr-2 header-chat-icon text-white"
+        className={`${
+          appState.unreadChatCount ? "text-danger" : "text-white"
+        } mr-2 header-chat-icon`}
+        onClick={() => appDispatch({ type: "TOGGLECHAT" })}
       >
-        <i className="fas fa-comment"></i>
-        <span className="chat-count-badge text-white"> </span>
+        <i className="fas fa-comment" style={{ fontSize: "20px" }}></i>
+        {appState.unreadChatCount ? (
+          <span className="chat-count-badge text-white">
+            {appState.unreadChatCount < 10 ? appState.unreadChatCount : "9+"}
+          </span>
+        ) : (
+          ""
+        )}
       </span>
       <ReactTooltip place="bottom" id="chat" className="custom-tooltip" />{" "}
       <Link

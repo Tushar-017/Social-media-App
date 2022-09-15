@@ -18,8 +18,16 @@ function HeaderLoggedOut({ setLoggedIn }) {
       })
       if (response.data) {
         appDispatch({ type: "LOGIN", data: response.data })
+        appDispatch({
+          type: "FLASHMESSAGE",
+          value: "You have successfully SignIn.",
+        })
       } else {
         console.log("Incorrect username/password")
+        appDispatch({
+          type: "FLASHMESSAGE",
+          value: "Incorrect username/password",
+        })
       }
     } catch (error) {
       console.log("There was a problem.")

@@ -20,6 +20,7 @@ import ViewSinglePost from "./pages/ViewSinglePost"
 import Profile from "./pages/Profile"
 import EditPost from "./pages/EditPost"
 import NotFound from "./components/NotFound"
+import Chat from "./pages/Chat"
 
 import StateContext from "./context/StateContext"
 import DispatchContext from "./context/DispatchContext"
@@ -34,6 +35,8 @@ function Main() {
       avatar: localStorage.getItem("appAvatar"),
     },
     isSearchOpen: false,
+    isChatOpen: false,
+    unreadChatCount: 0,
   }
 
   function ourReducer(draft, action) {
@@ -54,6 +57,18 @@ function Main() {
       case "CLOSESEARCH":
         draft.isSearchOpen = false
         return
+      case "TOGGLECHAT":
+        draft.isChatOpen = !draft.isChatOpen
+        return
+      case "CLOSECHAT":
+        draft.isChatOpen = false
+        return
+      case "INCREMENTUNREADCHATCOUNT":
+        draft.unreadChatCount++
+        return
+      case "CLEAR_UNREAD_CHAT_COUNT":
+        draft.unreadChatCount = 0
+        return
     }
   }
 
@@ -70,6 +85,33 @@ function Main() {
       localStorage.removeItem("appAvatar")
     }
   }, [state.loggedIn])
+
+  // Check if token is expired or not
+  useEffect(() => {
+    if (state.loggedIn) {
+      const ourRequest = Axios.CancelToken.source()
+      const fetchResult = async () => {
+        try {
+          const response = await Axios.post(
+            "/checkToken",
+            { token: state.user.token },
+            { cancelToken: ourRequest.token }
+          )
+          if (!response.data) {
+            dispatch({ type: "LOGOUT" })
+            dispatch({
+              type: "FLASHMESSAGE",
+              value: "Your session has expired, Please logIn again",
+            })
+          }
+        } catch (error) {
+          console.log("There was a problem or request was cancelled.")
+        }
+      }
+      fetchResult()
+      return () => ourRequest.cancel()
+    }
+  }, [])
 
   return (
     <StateContext.Provider value={state}>
@@ -98,6 +140,7 @@ function Main() {
           >
             <Search />
           </CSSTransition>
+          <Chat />
           <Footer />
         </BrowserRouter>
       </DispatchContext.Provider>

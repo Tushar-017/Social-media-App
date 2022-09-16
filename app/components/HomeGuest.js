@@ -4,7 +4,7 @@ import Axios from "axios"
 import { useImmerReducer } from "use-immer"
 import { CSSTransition } from "react-transition-group"
 
-import DispatchContext from "../context/DispatchContext"
+import DispatchContext from "../DispatchContext"
 
 function HomeGuest() {
   const appDispatch = useContext(DispatchContext)

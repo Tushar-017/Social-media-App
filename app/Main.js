@@ -4,7 +4,8 @@ import { useImmerReducer } from "use-immer"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import { CSSTransition } from "react-transition-group"
 import Axios from "axios"
-Axios.defaults.baseURL = "http://localhost:8080"
+Axios.defaults.baseURL =
+  process.env.BACKENDURL || "https://dopaminedigester.onrender.com"
 
 import Header from "./components/Header"
 import Footer from "./components/Footer"
@@ -24,8 +25,8 @@ import Profile from "./pages/Profile"
 import EditPost from "./pages/EditPost"
 import NotFound from "./components/NotFound"
 
-import StateContext from "./context/StateContext"
-import DispatchContext from "./context/DispatchContext"
+import StateContext from "./StateContext"
+import DispatchContext from "./DispatchContext"
 import LoadingIcon from "./components/LoadingIcon"
 
 function Main() {

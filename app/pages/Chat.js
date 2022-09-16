@@ -3,8 +3,8 @@ import { useImmer } from "use-immer"
 import { Link } from "react-router-dom"
 import io from "socket.io-client"
 
-import DispatchContext from "../context/DispatchContext"
-import StateContext from "../context/StateContext"
+import DispatchContext from "../DispatchContext"
+import StateContext from "../StateContext"
 
 function Chat() {
   const socket = useRef(null)
@@ -25,7 +25,9 @@ function Chat() {
   }, [appState.isChatOpen])
 
   useEffect(() => {
-    socket.current = io("http://localhost:8080")
+    socket.current = io(
+      process.env.BACKENDURL || "https://dopaminedigester.onrender.com"
+    )
     socket.current.on("chatFromServer", (message) => {
       setState((draft) => {
         draft.chatMessages.push(message)

@@ -1,9 +1,8 @@
 import React, { useContext, useEffect } from "react"
 import { useImmer } from "use-immer"
 import Axios from "axios"
-import { Link } from "react-router-dom"
 
-import DispatchContext from "../context/DispatchContext"
+import DispatchContext from "../DispatchContext"
 import Post from "./Post"
 
 function Search() {

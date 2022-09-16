@@ -8,7 +8,7 @@ import ProfilePosts from "../components/ProfilePosts"
 import ProfileFollowers from "../components/ProfileFollowers"
 import ProfileFollowing from "../components/ProfileFollowing"
 
-import StateContext from "../context/StateContext"
+import StateContext from "../StateContext"
 
 function Profile() {
   const { username } = useParams()

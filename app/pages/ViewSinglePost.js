@@ -4,8 +4,8 @@ import Axios from "axios"
 import ReactMarkdown from "react-markdown"
 import ReactTooltip from "react-tooltip"
 
-import StateContext from "../context/StateContext"
-import DispatchContext from "../context/DispatchContext"
+import StateContext from "../StateContext"
+import DispatchContext from "../DispatchContext"
 
 import Page from "../components/Page"
 import NotFound from "../components/NotFound"

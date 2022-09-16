@@ -7,7 +7,7 @@ import ReactMarkdown from "react-markdown"
 import LoadingIcon from "../components/LoadingIcon"
 import Page from "../components/Page"
 
-import StateContext from "../context/StateContext"
+import StateContext from "../StateContext"
 
 function Home() {
   const appState = useContext(StateContext)

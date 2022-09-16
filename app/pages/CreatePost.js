@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom"
 import Page from "../components/Page"
 import Axios from "axios"
 
-import DispatchContext from "../context/DispatchContext"
-import StateContext from "../context/StateContext"
+import DispatchContext from "../DispatchContext"
+import StateContext from "../StateContext"
 
 function CreatePost({ addFlashMessage }) {
   const [title, setTitle] = useState()

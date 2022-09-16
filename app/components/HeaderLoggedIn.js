@@ -1,11 +1,12 @@
 import React, { useContext } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import ReactTooltip from "react-tooltip"
 
-import DispatchContext from "../context/DispatchContext"
-import StateContext from "../context/StateContext"
+import DispatchContext from "../DispatchContext"
+import StateContext from "../StateContext"
 
 function HeaderLoggedIn() {
+  const navigate = useNavigate()
   const appDispatch = useContext(DispatchContext)
   const appState = useContext(StateContext)
 
@@ -15,6 +16,7 @@ function HeaderLoggedIn() {
       type: "FLASHMESSAGE",
       value: "You have successfully SignOut.",
     })
+    navigate("/")
   }
   const handleSearchIcon = (e) => {
     e.preventDefault(appDispatch({ type: "OPENSEARCH" }))

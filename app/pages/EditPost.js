@@ -7,8 +7,8 @@ import NotFound from "../components/NotFound"
 import Page from "../components/Page"
 import LoadingIcon from "../components/LoadingIcon"
 
-import StateContext from "../context/StateContext"
-import DispatchContext from "../context/DispatchContext"
+import StateContext from "../StateContext"
+import DispatchContext from "../DispatchContext"
 
 function EditPost() {
   const navigate = useNavigate()

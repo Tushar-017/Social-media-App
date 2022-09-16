@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react"
 import Axios from "axios"
 
-import DispatchContext from "../context/DispatchContext"
+import DispatchContext from "../DispatchContext"
 
 function HeaderLoggedOut({ setLoggedIn }) {
   const appDispatch = useContext(DispatchContext)

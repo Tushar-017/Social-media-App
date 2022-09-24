@@ -18,6 +18,7 @@ Dopamine Digester | Social-media website build using React and Firebase.
 
 - login/SignUp
 - Follow/unFollow
+- Search
 - chat
 - create post
 - delete post
